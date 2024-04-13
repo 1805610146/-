@@ -1,26 +1,21 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+<script setup>
+import { ref } from 'vue'
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+const c = ref(0)
+const f = ref(32)
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+function setC(e, v = +e.target.value) {
+  c.value = v
+  f.value = v * (9 / 5) + 32
+}
+
+function setF(e, v = +e.target.value) {
+  f.value = v
+  c.value = (v - 32) * (5 / 9)
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+  <input type="number" :value="c" @change="setC"> 摄氏度 =
+  <input type="number" :value="f" @change="setF"> 华氏度
+</template>
